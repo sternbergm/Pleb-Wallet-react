@@ -10,7 +10,7 @@ function App() {
     axios
       .get("https://api.coinbase.com/v2/prices/BTC-USD/spot")
       .then((res) => {
-        setPrice(res.data.data.amount);
+        setPrice(res.data.data.amount); 
       })
       .catch((err) => {
         console.log(err);
