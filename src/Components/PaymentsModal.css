@@ -25,4 +25,9 @@ form {
     cursor: pointer;
     text-align: end;
    }
-   
+
+   .QR {
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+   }

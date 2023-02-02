@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
+import QRCode from "react-qr-code";
 import "./PaymentsModal.css";
 
 const customStyles = {
@@ -12,6 +13,8 @@ const customStyles = {
     },
    };
 const PaymentsModal = ({modalState,setModalState}) => {
+
+    const walletKey = process.env.REACT_APP_KEY;
 
     const [formData, setFormData] = useState({
         amount: 0,
@@ -30,7 +33,7 @@ const PaymentsModal = ({modalState,setModalState}) => {
         e.preventDefault();
 
         const headers = {
-            "X-Api-Key": "52cac212fc664da393ac45df991fdb84",
+            "X-Api-Key": walletKey,
         };
         const data = {
             bolt11: formData.invoiceToPay,
@@ -54,7 +57,7 @@ const PaymentsModal = ({modalState,setModalState}) => {
         e.preventDefault();
 
         const headers = {
-            "X-Api-Key": "52cac212fc664da393ac45df991fdb84",
+            "X-Api-Key": walletKey,
         };
         const data = {
             amount: formData.amount,
@@ -138,6 +141,12 @@ const PaymentsModal = ({modalState,setModalState}) => {
                 <section>
                     <h3>Invoice created</h3>
                     <p>{invoice}</p>
+                    <QRCode
+                        className="QR"
+                        size={256}
+                        value={invoice}
+                        viewBox={`0 0 256 256`}
+                    />
                 </section>
             )}
             {paymentInfo.paymentHash && (
